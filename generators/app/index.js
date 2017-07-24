@@ -2,6 +2,8 @@
 
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
+const path = require('path');
+const mkdirp = require('mkdirp');
 
 const options = require('./partials/_options')
 const prompts = require('./partials/_prompting')
@@ -13,14 +15,18 @@ const $scope = {
 module.exports = class Mtpg extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.generator = {}
+    this.props = {}
     // This makes `appname` a required argument.
     this.argument('appname', {
       type: String,
       desc: 'app name',
-      required: true 
+      required: true,
+      validate: str => {
+        return str.length > 0;
+      }
     });
 
+    this.props.name = this.options.appname
     // And you can then access it later; e.g.
     this.log(this.options.appname);
 
@@ -56,6 +62,17 @@ module.exports = class Mtpg extends Generator {
 
   installingLodash() {
     this.npmInstall(['lodash'], { 'save-dev': true });
+  }
+
+  default() {
+    if (path.basename(this.destinationPath()) !== this.props.name) {
+      this.log(
+        'Your app must be inside a folder named ' + this.props.name + '\n' +
+        'I\'ll automatically create this folder.'
+      );
+      mkdirp(this.props.name);
+      this.destinationRoot(this.destinationPath(this.props.name));
+    }
   }
 
   paths() {
