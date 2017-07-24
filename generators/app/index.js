@@ -3,6 +3,13 @@
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 
+const options = require('./partials/_options')
+const prompts = require('./partials/_prompting')
+
+const $scope = {
+  yosay
+}
+
 module.exports = class Mtpg extends Generator {
   constructor(args, opts) {
     super(args, opts);
@@ -17,21 +24,24 @@ module.exports = class Mtpg extends Generator {
     // And you can then access it later; e.g.
     this.log(this.options.appname);
 
-    // This method adds support for a `--coffee` flag
-    this.option('database', {
-      alias: 'db',
-      desc: 'Set database used in this app',
-      type: String,
-      default: '0'
-    });
+    for(let i = 0; i < options.length; i++) {
+      this.option(options[i].prop, options[i].val)
+    }
 
+    // this.log(this.options)
     // And you can then access it later; e.g.
-    this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
+    // this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
 
   }
 
   initializing() {
-    this.composeWith(require.resolve('./partials/_prompting'));
+    if (this.options.database && !this.options['skip-orm']) {
+      this.composeWith(require.resolve('../db'), {
+        arguments:[{
+          db: this.options.db
+        }]
+      });
+    }
     this.composeWith(require.resolve('../koa'));
     this.composeWith(require.resolve('../webpack'));
   }
@@ -69,6 +79,7 @@ module.exports = class Mtpg extends Generator {
   }
 
   prompting() {
+    return prompts(Object.assign({}, $scope, {this: this}))
   }
 
   writing() {

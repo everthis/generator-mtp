@@ -5,6 +5,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
+  	this.log(this.options)
     this.log('writing - turbo');
   }
 
