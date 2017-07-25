@@ -4,11 +4,17 @@ function prompts($scope) {
     if (!$scope.this.options['skip-welcome-message']) {
         $scope.this.log($scope.yosay('project generator'));
     }
-    const prompts = [{
+    const promptsArr = [{
         type: 'input',
         name: 'name',
-        message: 'Your project name',
+        message: 'This project name',
         default: $scope.this.appname // Default to current folder name
+    }, {
+      type: 'input',
+      name: 'description',
+      message: 'Description',
+      default: `Description of ${$scope.this.appname}`,
+      when: answers => !$scope.this.options.description
     }, {
         type: 'checkbox',
         name: 'features',
@@ -28,6 +34,20 @@ function prompts($scope) {
         }]
     }, {
         type: 'list',
+        name: 'CSS-preprocessor',
+        message: 'Which CSS preprocessor would you like to use?',
+        choices: ['Sass', 'Less', 'Stylus'],
+        default: 0,
+        when: answers => answers.features.indexOf('includeCSSPreprocessor') !== -1
+    }, {
+        type: 'list',
+        name: 'Nodejs',
+        message: 'Which Nodejs framework would you like to use?',
+        choices: ['Express', 'Koa'],
+        default: 1,
+        when: answers => answers.features.indexOf('includeNodejs') !== -1
+    }, {
+        type: 'list',
         name: 'db',
         message: 'which database would you like to use?',
         choices: ['No database', 'mysql', 'pg'],
@@ -42,13 +62,6 @@ function prompts($scope) {
         when: answers => answers.features.indexOf('includeNodejs') !== -1
     }, {
         type: 'list',
-        name: 'CSS-preprocessor',
-        message: 'Which CSS preprocessor would you like to use?',
-        choices: ['Sass', 'Less', 'Stylus'],
-        default: 0,
-        when: answers => answers.features.indexOf('includeCSSPreprocessor') !== -1
-    }, {
-        type: 'list',
         name: 'legacyBootstrap',
         message: 'Which version of Bootstrap would you like to include?',
         choices: [{
@@ -60,7 +73,7 @@ function prompts($scope) {
         }],
         when: answers => answers.features.indexOf('includeLegacyBootstrap') !== -1
     }];
-    return $scope.this.prompt(prompts).then(answers => {
+    return $scope.this.prompt(promptsArr).then(answers => {
         // $scope.this.log('app name', answers.name);
         // $scope.this.log('database', answers.db);
         // $scope.this.log('cool feature', answers.cool);
@@ -68,10 +81,15 @@ function prompts($scope) {
         const hasFeature = feat => features && features.indexOf(feat) !== -1;
         // manually deal with the response, get back and store the results.
         // we change a bit $scope.this way of doing to automatically do $scope.this in the self.prompt() method.
+        const fields = ['description']
+        for (let i = 0; i < fields.length; i++) {
+            if(!$scope.this.props[fields[i]]) {
+                $scope.this.props[fields[i]] = answers[fields[i]] || ''
+            }
+        }
         $scope.this.includeSass = hasFeature('includeSass');
         $scope.this.includeBootstrap = hasFeature('includeBootstrap');
         $scope.this.includeModernizr = hasFeature('includeModernizr');
-        $scope.this.log(answers.legacyBootstrap)
         $scope.this.legacyBootstrap = answers.legacyBootstrap;
         $scope.this.includeJQuery = answers.includeJQuery;
     });

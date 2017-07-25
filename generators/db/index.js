@@ -24,6 +24,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.npmInstall(['sequelize', 'sequelize-cli'], { 'save': true });
+    // this.npmInstall(['sequelize', 'sequelize-cli'], { 'save': true });
   }
 };

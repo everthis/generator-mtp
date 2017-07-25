@@ -7,6 +7,7 @@ const mkdirp = require('mkdirp');
 
 const options = require('./partials/_options')
 const prompts = require('./partials/_prompting')
+const writes = require('./partials/_writing')
 
 const $scope = {
   yosay
@@ -50,6 +51,7 @@ module.exports = class Mtpg extends Generator {
     }
     this.composeWith(require.resolve('../koa'));
     this.composeWith(require.resolve('../webpack'));
+
   }
 
   method1() {
@@ -100,19 +102,9 @@ module.exports = class Mtpg extends Generator {
   }
 
   writing() {
-    this._writingPackageJSON()
+    writes(Object.assign({}, $scope, {this: this}))
   }
 
-  _writingPackageJSON() {
-    this.fs.copyTpl(
-      this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
-      {
-        includeSass: this.includeSass,
-        includeBabel: this.options['babel'],
-        includeJQuery: this.includeJQuery,
-      }
-    );
-  }
+
 
 };

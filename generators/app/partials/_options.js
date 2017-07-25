@@ -44,6 +44,14 @@ const options = [{
 	  type: String,
 	  default: 'socket'
 	}
+}, {
+	prop: 'description',
+	val: {
+	  alias: 'desc',
+	  desc: 'Set description of this app',
+	  type: String,
+	  default: ''
+	}
 }]
 
 module.exports = options
