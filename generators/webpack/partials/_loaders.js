@@ -25,6 +25,7 @@ const genRules = function($scope) {
             use: $scope.cssLoaderConfig
         })
     }, {
+        <% if ($scope.this.props['CSS-preprocessor'] === 'Sass') { -%>
         test: /\.scss$/,
         loader: $scope.ExtractTextPlugin.extract({
             fallback: 'style-loader',
@@ -32,6 +33,10 @@ const genRules = function($scope) {
                 $scope.cssLoaderConfig, 'postcss-loader', 'sass-loader'
             ]
         })
+        <% } else { -%>
+
+        <% } -%>
+
     }, {
         test: /\.(png|jpe?g|gif|svg|woff2?|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
