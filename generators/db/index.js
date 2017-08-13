@@ -1,5 +1,12 @@
 const Generator = require('yeoman-generator');
 const options = require('./partials/_options')
+const writes = require('./partials/_writing')
+const yosay = require('yosay')
+
+const $scope = {
+  yosay
+}
+
 module.exports = class extends Generator {
 
   constructor(args, opts) {
@@ -8,7 +15,7 @@ module.exports = class extends Generator {
     this.argument('db', {
       type: String,
       desc: 'database',
-      required: true 
+      required: true
     });
 
     for(let i = 0; i < options.length; i++) {
@@ -21,9 +28,15 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    writes(Object.assign({}, $scope, {this: this}))
   }
 
   install() {
-    // this.npmInstall(['sequelize', 'sequelize-cli'], { 'save': true });
+    this.npmInstall(['sequelize', 'sequelize-cli'], { 'save': true });
+  }
+  end() {
+    this.spawnCommandSync('npx', ['sequelize', 'init'], {
+      cwd: this.destinationPath(this.destinationRoot())
+    });
   }
 };

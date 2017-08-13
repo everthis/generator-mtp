@@ -29,7 +29,6 @@ prodConfig = merge.smartStrategy({
             deleteOriginalAssets: true,
             minRatio: 0.6
         }),
-        
         new webpack.BannerPlugin("banner"),
 	    new webpack.optimize.UglifyJsPlugin({
             comments: false,

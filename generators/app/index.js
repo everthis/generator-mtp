@@ -42,7 +42,7 @@ module.exports = class Mtpg extends Generator {
   }
 
   initializing() {
-    if (this.options.database && !this.options['skip-orm']) {
+    if (this.options.database && !this.options['no-db']) {
       this.composeWith(require.resolve('../db'), {
         arguments:[{
           db: this.options.db

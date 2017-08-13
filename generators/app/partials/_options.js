@@ -7,7 +7,7 @@ const options = [{
 	  default: 'mysql'
 	}
 }, {
-	prop: 'fe-framework',
+	prop: 'front-end-framework',
 	val: {
 	  alias: 'fef',
 	  desc: 'Set front end framework used in this app',

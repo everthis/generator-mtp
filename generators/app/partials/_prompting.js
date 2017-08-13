@@ -60,18 +60,6 @@ function prompts($scope) {
         choices: ['HTTP', 'Unix domain socket'],
         default: 2,
         when: answers => answers.features.indexOf('includeNodejs') !== -1
-    }, {
-        type: 'list',
-        name: 'legacyBootstrap',
-        message: 'Which version of Bootstrap would you like to include?',
-        choices: [{
-            name: 'Bootstrap 3',
-            value: true
-        }, {
-            name: 'Bootstrap 4',
-            value: false
-        }],
-        when: answers => answers.features.indexOf('includeLegacyBootstrap') !== -1
     }];
     return $scope.this.prompt(promptsArr).then(answers => {
         // $scope.this.log('app name', answers.name);
@@ -90,8 +78,8 @@ function prompts($scope) {
         $scope.this.includeSass = hasFeature('includeSass');
         $scope.this.includeBootstrap = hasFeature('includeBootstrap');
         $scope.this.includeModernizr = hasFeature('includeModernizr');
-        $scope.this.legacyBootstrap = answers.legacyBootstrap;
-        $scope.this.includeJQuery = answers.includeJQuery;
+        // $scope.this.legacyBootstrap = answers.legacyBootstrap;
+        // $scope.this.includeJQuery = answers.includeJQuery;
     });
 }
 module.exports = prompts

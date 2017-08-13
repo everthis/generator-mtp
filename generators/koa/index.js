@@ -9,6 +9,6 @@ module.exports = class extends Generator {
   }
 
   installingLodash() {
-    this.npmInstall(['koa'], { 'save': true });
+    // this.npmInstall(['koa'], { 'save': true });
   }
 };
