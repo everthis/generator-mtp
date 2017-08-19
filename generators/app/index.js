@@ -42,14 +42,19 @@ module.exports = class Mtpg extends Generator {
   }
 
   initializing() {
-    if (this.options.database && !this.options['no-db']) {
+    console.log(this.options)
+    console.log('inn')
+    if (!this.options || this.options.database || !this.options['no-db']) {
+      console.log('in')
       this.composeWith(require.resolve('../db'), {
         arguments:[{
           db: this.options.db
         }]
       });
     }
-    this.composeWith(require.resolve('../koa'));
+    if(this.options.node || this.options['no-node']) {
+      this.composeWith(require.resolve('../koa'));
+    }
     this.composeWith(require.resolve('../webpack'));
 
   }
@@ -63,7 +68,8 @@ module.exports = class Mtpg extends Generator {
   }
 
   installingLodash() {
-    this.npmInstall(['lodash'], { 'save-dev': true });
+    this.npmInstall(['babel-preset-env'], { 'save-dev': true });
+    this.npmInstall(['lodash'], { 'save': true });
   }
 
   default() {

@@ -6,6 +6,8 @@ const copyFiles = [
   '_.editorconfig',
   '_.gitignore',
   '_.babelrc',
+  '_tpl/layout.tpl',
+  '_tpl/index.tpl',
   '_.env'
 ]
 const tplFiles = [
