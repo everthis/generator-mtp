@@ -1,15 +1,16 @@
 const Generator = require('yeoman-generator');
 const writes = require('./partials/_writing')
+
 const $scope = {}
 
 module.exports = class extends Generator {
+
   constructor(args, opts) {
     super(args, opts);
+    let n = this.rootGeneratorName()
+    console.log(n)
   }
 
-  initializing() {
-    this.composeWith(require.resolve('../tpl'));
-  }
   prompting() {
   }
 
@@ -17,11 +18,13 @@ module.exports = class extends Generator {
     writes(Object.assign({}, $scope, {this: this}))
   }
 
-  installingLodash() {
+  install() {
     this.npmInstall([
-      'koa',
-      'koa-router',
-      'koa-session'
+      'vue',
+      'vuex',
+      'vue-router'
     ], { 'save': true });
+  }
+  end() {
   }
 };

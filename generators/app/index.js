@@ -54,7 +54,8 @@ module.exports = class Mtpg extends Generator {
         db: this.options.db
       });
     }
-    this.composeWith(require.resolve('../webpack'));
+    this.composeWith(require.resolve('../webpack'))
+    this.composeWith(require.resolve('../client'))
 
   }
 
