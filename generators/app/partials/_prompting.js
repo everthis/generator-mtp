@@ -36,8 +36,8 @@ function prompts($scope) {
         type: 'list',
         name: 'CSS-preprocessor',
         message: 'Which CSS preprocessor would you like to use?',
-        choices: ['Sass', 'Less', 'Stylus'],
-        default: 0,
+        choices: ['Less', 'Sass', 'Stylus'],
+        default: 1,
         when: answers => answers.features.indexOf('includeCSSPreprocessor') !== -1
     }, {
         type: 'list',
@@ -50,34 +50,51 @@ function prompts($scope) {
         type: 'list',
         name: 'db',
         message: 'which database would you like to use?',
-        choices: ['No database', 'mysql', 'pg'],
-        default: 2,
+        choices: [{
+            name: 'No database',
+            value: 0
+        }, {
+            name: 'mysql',
+            value: 1
+        }, {
+            name: 'pg',
+            value: 2
+        }],
+        default: 1,
         when: answers => answers.features.indexOf('includeDatabase') !== -1
     }, {
         type: 'list',
         name: 'NodejsMode',
         message: 'Nodejs connection method',
-        choices: ['HTTP', 'Unix domain socket'],
-        default: 2,
+        choices: [{
+            name: 'HTTP',
+            value: 0
+        }, {
+            name: 'Unix domain socket',
+            value: 1
+        }],
+        default: 1,
         when: answers => answers.features.indexOf('includeNodejs') !== -1
     }];
     return $scope.this.prompt(promptsArr).then(answers => {
         // $scope.this.log('app name', answers.name);
         // $scope.this.log('database', answers.db);
         // $scope.this.log('cool feature', answers.cool);
+        console.log(answers)
         const features = answers.features;
         const hasFeature = feat => features && features.indexOf(feat) !== -1;
         // manually deal with the response, get back and store the results.
         // we change a bit $scope.this way of doing to automatically do $scope.this in the self.prompt() method.
-        const fields = ['description']
+        const fields = Object.keys(answers)
         for (let i = 0; i < fields.length; i++) {
             if(!$scope.this.props[fields[i]]) {
                 $scope.this.props[fields[i]] = answers[fields[i]] || ''
             }
         }
-        $scope.this.includeSass = hasFeature('includeSass');
-        $scope.this.includeBootstrap = hasFeature('includeBootstrap');
-        $scope.this.includeModernizr = hasFeature('includeModernizr');
+        // $scope.this.includeSass = hasFeature('includeSass');
+        // $scope.this.includeBootstrap = hasFeature('includeBootstrap');
+        // $scope.this.includeModernizr = hasFeature('includeModernizr');
+        return $scope.this.props
         // $scope.this.legacyBootstrap = answers.legacyBootstrap;
         // $scope.this.includeJQuery = answers.includeJQuery;
     });

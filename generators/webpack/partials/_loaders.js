@@ -27,12 +27,12 @@ const genRules = function($scope) {
     }, {
         <% if ($scope.this.props['CSS-preprocessor'] === 'Sass') { -%>
         test: /\.scss$/,
-        loader: $scope.ExtractTextPlugin.extract({
+        loader: ['css-hot-loader'].concat($scope.ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
                 $scope.cssLoaderConfig, 'postcss-loader', 'sass-loader'
             ]
-        })
+        }))
         <% } else { -%>
 
         <% } -%>

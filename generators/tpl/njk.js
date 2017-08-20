@@ -5,3 +5,7 @@ njk.configure({
   autoescape: true,
   trimBlocks: true
 });
+
+module.exports = {
+  njk
+}

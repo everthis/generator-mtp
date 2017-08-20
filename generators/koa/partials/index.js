@@ -10,7 +10,6 @@ const nodeEnv = process.env.NODE_ENV
 const app = new koa();
 app.keys = ['secret_key'];
 app.use(async (ctx, next) => {
-    // config 注入中间件，方便调用配置信息
     if(!this.config){
         this.config = config;
     }
@@ -30,17 +29,6 @@ var logger = Logger({
     dir: config.logDir,
     format: 'YYYY-MM-DD-[{category}][.log]'
 });
-
-let helpers = require('../extensions/hbs.ext');
-app.use(handlebars({
-  root: config.xtplRootDir,
-  viewsDir: config.xtplViewDir,
-  partialsDir: config.xtplPartialsDir,
-  layoutsDir: config.xtplLayoutsDir,
-  defaultLayout: 'main',
-  extension: 'xtpl',
-  helpers: helpers
-}));
 
 app.context.logger = logger;
 

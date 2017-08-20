@@ -42,18 +42,17 @@ module.exports = class Mtpg extends Generator {
   }
 
   initializing() {
-    console.log(this.options)
-    console.log('inn')
     if (!this.options || this.options.database || !this.options['no-db']) {
-      console.log('in')
       this.composeWith(require.resolve('../db'), {
         arguments:[{
           db: this.options.db
         }]
       });
     }
-    if(this.options.node || this.options['no-node']) {
-      this.composeWith(require.resolve('../koa'));
+    if(!this.options['skip-node']) {
+      this.composeWith(require.resolve('../koa'), {
+        db: this.options.db
+      });
     }
     this.composeWith(require.resolve('../webpack'));
 

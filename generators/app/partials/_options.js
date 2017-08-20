@@ -15,6 +15,14 @@ const options = [{
 	  default: 'vue'
 	}
 }, {
+	prop: 'skip-node',
+	val: {
+	  alias: 'nn',
+	  desc: 'Don\'t use node in this app',
+	  type: Boolean,
+	  default: false
+	}
+}, {
 	prop: 'backend-framework',
 	val: {
 	  alias: 'bef',
