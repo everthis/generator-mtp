@@ -3,6 +3,7 @@
 const Generator = require('yeoman-generator')
 const yosay = require('yosay')
 const path = require('path')
+const chalk = require('chalk');
 const mkdirp = require('mkdirp')
 
 const options = require('./partials/_options')
@@ -62,11 +63,11 @@ module.exports = class Mtpg extends Generator {
   }
 
   method1() {
-    this.log('method 1 just ran')
+    // this.log('method 1 just ran')
   }
 
   method2() {
-    this.log('method 2 just ran')
+    // this.log('method 2 just ran')
   }
 
   installingLodash() {
@@ -78,7 +79,7 @@ module.exports = class Mtpg extends Generator {
     if (path.basename(this.destinationPath()) !== this.props.name) {
       this.log(
         'Your app must be inside a folder named ' +
-          this.props.name +
+          chalk.yellow(this.props.name) +
           '\n' +
           "I'll automatically create this folder."
       )
