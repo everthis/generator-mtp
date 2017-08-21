@@ -8,7 +8,7 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
     let n = this.rootGeneratorName()
-    console.log(n)
+    // console.log(n)
   }
 
   prompting() {

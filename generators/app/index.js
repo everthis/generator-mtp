@@ -57,6 +57,8 @@ module.exports = class Mtpg extends Generator {
     }
     this.composeWith(require.resolve('../client'))
     this.composeWith(require.resolve('../shared'))
+    this.composeWith(require.resolve('../test'))
+    this.composeWith(require.resolve('../bin'))
   }
 
   method1() {
@@ -88,10 +90,10 @@ module.exports = class Mtpg extends Generator {
   paths() {
     let r = this.destinationRoot()
     // returns '~/projects'
-    this.log(r)
+    // this.log(r)
 
     let s = this.sourceRoot()
-    this.log(s)
+    // this.log(s)
 
     this.destinationPath('index.js')
     // returns '~/projects/index.js'

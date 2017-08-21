@@ -80,7 +80,7 @@ function prompts($scope) {
         // $scope.this.log('app name', answers.name);
         // $scope.this.log('database', answers.db);
         // $scope.this.log('cool feature', answers.cool);
-        console.log(answers)
+        // console.log(answers)
         const features = answers.features;
         const hasFeature = feat => features && features.indexOf(feat) !== -1;
         // manually deal with the response, get back and store the results.

@@ -19,7 +19,7 @@ function genRelativePath(list = [], p) {
 }
 
 function typeCheck(filePath) {
-  const types = ['js', 'scss', 'vue', 'gitkeep', 'tpl']
+  const types = ['js', 'scss', 'vue', 'gitkeep', 'tpl', 'sh']
   for (let i = types.length - 1; i >= 0; i--) {
     if (types.indexOf(path.extname(filePath).slice(1)) !== -1) {
       return true
