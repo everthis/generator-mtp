@@ -9,6 +9,7 @@ module.exports = class extends Generator {
 
   initializing() {
     this.composeWith(require.resolve('../tpl'));
+    this.composeWith(require.resolve('../public'));
   }
   prompting() {
   }

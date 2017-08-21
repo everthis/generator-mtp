@@ -56,6 +56,7 @@ module.exports = class Mtpg extends Generator {
       })
     }
     this.composeWith(require.resolve('../client'))
+    this.composeWith(require.resolve('../shared'))
   }
 
   method1() {
