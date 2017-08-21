@@ -1,22 +1,21 @@
-'use strict';
+'use strict'
 
 const partialMark = '_'
 const pml = partialMark.length
-const copyFiles = [
-  '_.sequelizerc'
-]
-const tplFiles = [
-  '_modules/db.js'
-]
+const { findFiles, destFile } = require('../../../public/walk')
+const copyFiles = ['_.sequelizerc']
 
 function writes($scope) {
     let writesObj = {
         _tplFiles() {
-            console.log($scope.this.props)
+            let tp = $scope.this.templatePath()
+            let tplFiles = findFiles(tp)
             for (let i = 0; i < tplFiles.length; i++) {
                 $scope.this.fs.copyTpl(
                     $scope.this.templatePath(tplFiles[i]),
-                    $scope.this.destinationPath('server/' + tplFiles[i].slice(pml)),
+                    $scope.this.destinationPath(
+                        'server/' + destFile(tplFiles[i])
+                    ),
                     $scope.this.props
                 )
             }
