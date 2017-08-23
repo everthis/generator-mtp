@@ -18,8 +18,8 @@ function genRelativePath(list = [], p) {
   return list.map(el => el.slice(p.length + 1))
 }
 
-function typeCheck(filePath) {
-  const types = ['js', 'scss', 'vue', 'gitkeep', 'tpl', 'sh']
+function typeCheck(filePath, defaultTypes) {
+  const types = defaultTypes || ['js', 'scss', 'vue', 'gitkeep', 'tpl', 'sh']
   for (let i = types.length - 1; i >= 0; i--) {
     if (types.indexOf(path.extname(filePath).slice(1)) !== -1) {
       return true
@@ -37,4 +37,4 @@ function destFile(fp) {
   const po = path.parse(fp)
   return po.dir + '/' + po.base.slice(pml)
 }
-module.exports = { findFiles, destFile }
+module.exports = { findFiles, destFile, walkSync }

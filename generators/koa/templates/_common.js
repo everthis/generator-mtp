@@ -1,12 +1,13 @@
 'use strict';
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
-const pp = require('../../public/javascripts/pp');
-const apiDir = path.resolve(__dirname, './api');
-const jsonStr = JSON.stringify;
+const apiDir = path.resolve(__dirname, './api')
+const modulesDir = path.resolve(__dirname, './modules')
+const jsonStr = JSON.stringify
 const log = console.log
 const _ = require('lodash')
-const ejs = require('ejs')
+let modules = {}
 
 function removeFalsePropFromObj(obj) {
 	let clone = cloneObj(obj);
@@ -28,20 +29,30 @@ function isAsyncFn(fn) {
   return fn[Symbol.toStringTag] === 'AsyncFunction' ? true : false
 }
 
+fs
+  .readdirSync(modulesDir)
+  .filter(function(file) {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(function(file) {
+    let m = require(path.join(modulesDir, file));
+    if (m.name) modules[m.name] = m;
+  });
+
 module.exports = {
 	db,
 	sequelize,
 	util: {
 	    path,
 	    _,
-	    ejs,
-		pp,
 	    log,
 	    ok,
 		jsonStr,
 	    isAsyncFn,
 		removeFalsePropFromObj
 	},
+	modules,
+	m: modules,
     apiDir,
 	api: {}
 }
