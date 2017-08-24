@@ -15,7 +15,7 @@
 
 <script>
   import NavMenu from './navMenu'
-  import { mapActions } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   export default {
   	components: { NavMenu },
   	data () {
@@ -23,8 +23,11 @@
   			loggedIn: false
   		}
   	},
-  	created () {
-  	},
+    computed: {
+      ...mapState({
+        'userName'
+      })
+    },
   	methods: {
   		...mapActions([
   		    'queryUserInfo'

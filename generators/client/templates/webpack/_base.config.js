@@ -115,7 +115,7 @@ let defaults = {
         new webpack.ProvidePlugin({}),
         new webpack.optimize.CommonsChunkPlugin({
           name: "vendor",
-          minChunks: Infinity
+          minChunks: 2
         })
     ]
 };
