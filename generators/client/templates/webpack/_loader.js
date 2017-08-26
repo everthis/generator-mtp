@@ -35,7 +35,14 @@ const genRules = function($scope) {
                     fallback: 'style-loader',
                     use: [
                         $scope.cssLoaderConfig,
-                        'postcss-loader',
+                        {
+                          loader: 'postcss-loader',
+                          options: {
+                            plugins: (loader) => [
+                              $scope.autoprefixer({browsers: ['last 3 versions', 'iOS 9']}),
+                            ]
+                          }
+                        },
                         'sass-loader'
                     ]
                 })

@@ -1,4 +1,4 @@
-import * as types from './mutation-types'
+import * as types from './mutationTypes'
 
 export default {
   [types.SET_USER_INFO] (state, { info }) {

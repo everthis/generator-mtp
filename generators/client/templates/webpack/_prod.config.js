@@ -6,7 +6,7 @@ let merge = require('webpack-merge');
 let webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let CompressionPlugin = require("compression-webpack-plugin");
-let baseConfig = require('./webpack.base.config').defaults;
+let baseConfig = require('./base.config').defaults;
 let prodConfig = {};
 
 prodConfig = merge.smartStrategy({

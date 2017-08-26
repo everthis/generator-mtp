@@ -24,23 +24,23 @@
   		}
   	},
     computed: {
-      ...mapState({
+      ...mapState([
         'userName'
-      })
+      ])
     },
   	methods: {
   		...mapActions([
-  		    'queryUserInfo'
+  		    'getUserInfo'
   		])
   	},
   	created() {
-  		this.queryUserInfo();
+  		this.getUserInfo();
   	}
   }
 </script>
 
 <style lang='scss' scoped>
-  @import '../stylesheets/partials/var';
+  @import '../stylesheet/partials/var';
   .app-container {
     display: flex;
   }

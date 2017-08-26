@@ -70,7 +70,7 @@ module.exports = class Mtpg extends Generator {
     // this.log('method 2 just ran')
   }
 
-  installingLodash() {
+  install() {
     this.npmInstall(['babel-preset-env', 'babel-plugin-transform-object-rest-spread'], { 'save-dev': true })
     this.npmInstall(['lodash'], { save: true })
   }

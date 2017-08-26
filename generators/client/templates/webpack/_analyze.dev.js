@@ -6,7 +6,7 @@ let merge = require('webpack-merge');
 let webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-let prodConfig = require('./prod.config');
+let prodConfig = require('./dev.config');
 let analyzeConfig = {};
 
 analyzeConfig = merge.smartStrategy({
@@ -15,7 +15,7 @@ analyzeConfig = merge.smartStrategy({
     plugins: [
 	    new BundleAnalyzerPlugin({
 	        analyzerMode: 'server',
-          analyzerHost: '0.0.0.0',
+            analyzerHost: '0.0.0.0',
 	        generateStatsFile: true
 	    })
     ]

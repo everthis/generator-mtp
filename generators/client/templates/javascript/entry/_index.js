@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from './vuex/store'
-import Entry from '../components/entry.vue'
-import styles from '../stylesheets/index.scss';
+import store from '../vuex/store'
+import Entry from '../../component/entry.vue'
+import styles from '../../stylesheet/index.scss';
 
 function importComponent(name) {
   return function(resolve) {
-    import(`../components/${name}.vue`).then(mod => {
+    import(`../../component/${name}.vue`).then(mod => {
       resolve(mod)
     })
   }
