@@ -3,7 +3,7 @@
 const Generator = require('yeoman-generator')
 const yosay = require('yosay')
 const path = require('path')
-const chalk = require('chalk');
+const chalk = require('chalk')
 const mkdirp = require('mkdirp')
 
 const options = require('./partials/_options')
@@ -53,7 +53,8 @@ module.exports = class Mtpg extends Generator {
     }
     if (!this.options['skip-node']) {
       this.composeWith(require.resolve('../koa'), {
-        db: this.options.db
+        db: this.options.db,
+        moduleName: this.options.appname
       })
     }
     this.composeWith(require.resolve('../client'))
@@ -71,7 +72,10 @@ module.exports = class Mtpg extends Generator {
   }
 
   install() {
-    this.npmInstall(['babel-preset-env', 'babel-plugin-transform-object-rest-spread'], { 'save-dev': true })
+    this.npmInstall(
+      ['babel-preset-env', 'babel-plugin-transform-object-rest-spread'],
+      { 'save-dev': true }
+    )
     this.npmInstall(['lodash'], { save: true })
   }
 

@@ -40,7 +40,7 @@
 </script>
 
 <style lang='scss' scoped>
-  @import '../stylesheet/partials/var';
+  @import '../stylesheet/partial/var';
   .app-container {
     display: flex;
   }

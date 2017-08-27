@@ -36,12 +36,14 @@ const genRules = function($scope) {
                     use: [
                         $scope.cssLoaderConfig,
                         {
-                          loader: 'postcss-loader',
-                          options: {
-                            plugins: (loader) => [
-                              $scope.autoprefixer({browsers: ['last 3 versions', 'iOS 9']}),
-                            ]
-                          }
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: loader => [
+                                    $scope.autoprefixer({
+                                        browsers: ['last 3 versions', 'iOS 9']
+                                    })
+                                ]
+                            }
                         },
                         'sass-loader'
                     ]
@@ -53,7 +55,7 @@ const genRules = function($scope) {
             loader: 'url-loader',
             query: {
                 limit: 10000,
-                name: 'assets/img/[name].[ext]'
+                name: 'asset/[name].[ext]'
             }
         },
         {
