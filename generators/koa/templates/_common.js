@@ -45,8 +45,6 @@ fs
 	})
 
 module.exports = {
-	db,
-	sequelize,
 	util: {
 		path,
 		_,
