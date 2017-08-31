@@ -1,4 +1,5 @@
-let path = require('path')
+const path = require('path')
+const api = require('../api/index')
 const common = require('../common')
 let controller = {
   index: async (ctx, next) => {
@@ -9,7 +10,6 @@ let controller = {
     })
   }
 }
-let api = require('../api/index')
 
 function getPathFromUrl(url) {
   return url.split(/[?#]/)[0]

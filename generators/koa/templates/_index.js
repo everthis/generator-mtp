@@ -28,8 +28,8 @@ app.use(
     )
 )
 
-var Logger = require('mini-logger')
-var logger = Logger({
+const Logger = require('mini-logger')
+const logger = Logger({
     dir: config.logDir,
     format: 'YYYY-MM-DD-[{category}][.log]'
 })

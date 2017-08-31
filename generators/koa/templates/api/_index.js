@@ -1,11 +1,11 @@
 /*
- * apis entry
+ * api entry
  */
 const fs = require('fs')
 const path = require('path')
 const common = require('../common')
 const basename = path.basename(module.filename)
-const apis = {}
+const api = {}
 
 function factoryFn(fn) {
   const isAsync = common.util.isAsyncFn(fn)
@@ -32,7 +32,7 @@ fs
     const api = require(path.join(common.apiDir, file))
     /* eslint-enable global-require */
     /* eslint-enable import/no-dynamic-require */
-    if (api.name) apis[api.name] = factoryFn(api)
+    if (api.name) api[api.name] = factoryFn(api)
   })
 
-module.exports = apis
+module.exports = api
