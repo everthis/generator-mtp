@@ -14,12 +14,15 @@ function mkpDest(filep) {
         return `${res.base.slice(pml)}`
     }
 }
-
+function filterFiles(arr, excludeFiles) {
+    return arr.filter(el => excludeFiles.indexOf(el) === -1)
+}
 function writes($scope) {
     let writesObj = {
         _tplFiles() {
             let tp = $scope.this.templatePath()
             let tplFiles = findFiles(tp)
+            tplFiles = filterFiles(tplFiles, copyFiles)
             for (let i = 0; i < tplFiles.length; i++) {
                 $scope.this.fs.copyTpl(
                     $scope.this.templatePath(tplFiles[i]),
