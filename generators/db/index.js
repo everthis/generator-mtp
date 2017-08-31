@@ -1,4 +1,4 @@
-const Generator = require('yeoman-generator');
+const Generator = require('yeoman-generator')
 const options = require('./partials/_options')
 const writes = require('./partials/_writing')
 const prompts = require('./partials/_prompting')
@@ -9,20 +9,18 @@ const $scope = {
 }
 
 module.exports = class extends Generator {
-
   constructor(args, opts) {
-    super(args, opts);
+    super(args, opts)
     this.props = {}
     this.argument('db', {
       type: String,
       desc: 'database',
       required: true
-    });
+    })
 
-    for(let i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
       this.option(options[i].prop, options[i].val)
     }
-
   }
 
   prompting() {
@@ -30,15 +28,33 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    writes(Object.assign({}, $scope, {this: this}))
+    writes(Object.assign({}, $scope, { this: this }))
   }
 
   install() {
-    this.npmInstall(['sequelize', 'sequelize-cli'], { 'save': true });
+    this.npmInstall(['sequelize', 'sequelize-cli', 'mysql2'], { save: true })
   }
   end() {
-    // this.spawnCommandSync('npx', ['sequelize', 'init'], {
-    //   cwd: this.destinationPath(this.destinationRoot())
-    // });
+    this.spawnCommandSync(
+      'node',
+      ['./node_modules/.bin/sequelize', 'init:models'],
+      {
+        cwd: this.destinationPath(this.destinationRoot())
+      }
+    )
+    this.spawnCommandSync(
+      'node',
+      ['./node_modules/.bin/sequelize', 'init:migrations'],
+      {
+        cwd: this.destinationPath(this.destinationRoot())
+      }
+    )
+    this.spawnCommandSync(
+      'node',
+      ['./node_modules/.bin/sequelize', 'init:seeders'],
+      {
+        cwd: this.destinationPath(this.destinationRoot())
+      }
+    )
   }
-};
+}

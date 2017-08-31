@@ -65,7 +65,7 @@ module.exports = class extends Generator {
         field: 'scripts',
         key: 'dev:webpack',
         val:
-          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8053 --progress --inline --hot --socket shared/sockets/webpack.sock'
+          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8051 --progress --inline --hot --socket shared/sockets/webpack.sock'
       },
       {
         field: 'scripts',
@@ -76,6 +76,11 @@ module.exports = class extends Generator {
         field: 'scripts',
         key: 'prod:webpack:analyze',
         val: 'webpack --config ./client/webpack/analyze.prod.js'
+      },
+      {
+        field: 'scripts',
+        key: 'dev:start',
+        val: 'npm run dev:webpack & npm run dev:node'
       }
     ])
   }

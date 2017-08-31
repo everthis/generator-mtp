@@ -22,7 +22,8 @@ const xtplRootDir = path.join(__dirname, '..', 'server')
 const xtplViewDir = 'templates'
 const xtplLayoutsDir = './templates/layouts'
 const xtplPartialsDir = './templates/partials'
-const appPrefix = '/<%= moduleName %>'
+const appPrefix =
+    '/<%= moduleName.split(' - ')[moduleName.split(' - ').length - 1] %>'
 module.exports = {
     isDev,
     isProd,

@@ -29,7 +29,8 @@ module.exports = class extends Generator {
         'koa-session',
         'koa-onerror',
         'koa-bodyparser',
-        'mini-logger'
+        'mini-logger',
+        'dotenv'
       ],
       { save: true }
     )

@@ -73,7 +73,11 @@ module.exports = class Mtpg extends Generator {
 
   install() {
     this.npmInstall(
-      ['babel-preset-env', 'babel-plugin-transform-object-rest-spread'],
+      [
+        'babel-preset-env',
+        'babel-plugin-transform-object-rest-spread',
+        'foreman'
+      ],
       { 'save-dev': true }
     )
     this.npmInstall(['lodash'], { save: true })
@@ -118,5 +122,10 @@ module.exports = class Mtpg extends Generator {
 
   writing() {
     writes(Object.assign({}, $scope, { this: this }))
+  }
+  end() {
+    this.spawnCommandSync('git', ['init'], {
+      cwd: this.destinationPath(this.destinationRoot())
+    })
   }
 }

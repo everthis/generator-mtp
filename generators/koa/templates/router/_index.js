@@ -1,7 +1,9 @@
 let path = require('path')
+const common = require('../common')
 let controller = {
   index: async (ctx, next) => {
-    await ctx.render('index', {
+    ctx.type = 'text/html; charset=utf-8'
+    ctx.body = await common.m.njk.render('index.tpl', {
       title: 'service',
       name: 'ok'
     })
@@ -44,5 +46,4 @@ const cindex = controller.index
 
 module.exports = function(app) {
   app.get('/', formatWrap(cindex, api.service))
-  app.post('/', api.service)
 }

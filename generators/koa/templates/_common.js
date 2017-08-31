@@ -34,14 +34,12 @@ fs
 	.readdirSync(modulesDir)
 	.filter(function(file) {
 		return (
-			file.indexOf('.') !== 0 &&
-			file !== basename &&
-			file.slice(-3) === '.js'
+			file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
 		)
 	})
 	.forEach(function(file) {
 		let m = require(path.join(modulesDir, file))
-		if (m.name) modules[m.name] = m
+		if (m.moduleName) modules[m.moduleName] = m
 	})
 
 module.exports = {

@@ -1,9 +1,19 @@
 'use strict'
 
+const path = require('path')
 const partialMark = '_'
 const pml = partialMark.length
 const { findFiles, destFile } = require('../../../public/walk')
-const copyFiles = ['_.sequelizerc']
+const copyFiles = ['_.sequelizerc', 'db/config/_config.js']
+
+function mkpDest(filep) {
+    const res = path.parse(filep)
+    if (res.dir) {
+        return `${res.dir}/${res.base.slice(pml)}`
+    } else {
+        return `${res.base.slice(pml)}`
+    }
+}
 
 function writes($scope) {
     let writesObj = {
@@ -24,7 +34,7 @@ function writes($scope) {
             for (let i = 0; i < copyFiles.length; i++) {
                 $scope.this.fs.copy(
                     $scope.this.templatePath(copyFiles[i]),
-                    $scope.this.destinationPath(copyFiles[i].slice(pml))
+                    $scope.this.destinationPath(mkpDest(copyFiles[i]))
                 )
             }
         }

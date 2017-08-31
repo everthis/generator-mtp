@@ -1,7 +1,10 @@
-const db = require('../../db/models/index');
-const sequelize = db.sequelize;
+const path = require('path')
+const moduleName = path.parse(module.filename).name
+const db = require('../../db/models/index')
+const sequelize = db.sequelize
 
 module.exports = {
-	db,
-	sequelize
+  moduleName,
+  db,
+  sequelize
 }
