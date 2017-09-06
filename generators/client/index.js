@@ -7,6 +7,9 @@ const $scope = {}
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
+    this.props = {
+      moduleName: opts.moduleName
+    }
     const n = this.rootGeneratorName()
   }
 
@@ -65,7 +68,7 @@ module.exports = class extends Generator {
         field: 'scripts',
         key: 'dev:webpack',
         val:
-          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8051 --progress --inline --hot --socket shared/sockets/webpack.sock'
+          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8050 --progress --inline --hot --socket shared/socket/webpack.sock'
       },
       {
         field: 'scripts',

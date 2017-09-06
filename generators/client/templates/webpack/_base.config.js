@@ -19,7 +19,7 @@ const $scope = {
 }
 const rules = require('./loader')($scope)
 
-let moduleName = 'skynet'
+let moduleName = '<%= moduleName %>'
 let defaults = {
     entry: {
         vendor: ['whatwg-fetch', 'vue', 'vue-router'],
