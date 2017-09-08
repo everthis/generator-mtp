@@ -28,6 +28,8 @@ module.exports = class Mtpg extends Generator {
       }
     })
 
+    console.log(this.options)
+
     this.props.name = this.options.appname
     // And you can then access it later; e.g.
     this.log(this.options.appname)
@@ -65,13 +67,9 @@ module.exports = class Mtpg extends Generator {
     this.composeWith(require.resolve('../bin'))
   }
 
-  method1() {
-    // this.log('method 1 just ran')
-  }
+  method1() {}
 
-  method2() {
-    // this.log('method 2 just ran')
-  }
+  method2() {}
 
   install() {
     this.npmInstall(
@@ -119,7 +117,7 @@ module.exports = class Mtpg extends Generator {
   }
 
   prompting() {
-    return prompts(Object.assign({}, $scope, { this: this }))
+    return prompts(Object.assign($scope, { this: this }))
   }
 
   writing() {
