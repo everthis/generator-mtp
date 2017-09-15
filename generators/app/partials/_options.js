@@ -29,7 +29,7 @@ const options = [
 	{
 		prop: 'orm',
 		val: {
-			desc: 'ORM framework used in this app. (none, sequelize)',
+			desc: 'orm framework used in this app. (none, sequelize)',
 			type: String,
 			default: 'sequelize'
 		}
@@ -47,7 +47,7 @@ const options = [
 	{
 		prop: 'css',
 		val: {
-			desc: 'CSS preprocessor usage. (plain, sass, less, stylus)',
+			desc: 'css preprocessor usage. (plain, sass, less, stylus)',
 			type: String,
 			default: 'sass'
 		}
@@ -58,7 +58,24 @@ const options = [
 			alias: 'desc',
 			desc: 'description of this app',
 			type: String,
-			default: ''
+			default: 'description of this app'
+		}
+	},
+	{
+		prop: 'skip-prompt',
+		val: {
+			alias: 'y',
+			desc: 'skip prompting',
+			type: Boolean,
+			default: false
+		}
+	},
+	{
+		prop: 'safe',
+		val: {
+			desc: 'use tested version of dependencies',
+			type: Boolean,
+			default: false
 		}
 	}
 ]

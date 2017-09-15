@@ -28,7 +28,7 @@ module.exports = class Mtpg extends Generator {
       }
     })
 
-    console.log(this.options)
+    // console.log(this.options)
 
     this.props.name = this.options.appname
     // And you can then access it later; e.g.
@@ -67,10 +67,6 @@ module.exports = class Mtpg extends Generator {
     this.composeWith(require.resolve('../bin'))
   }
 
-  method1() {}
-
-  method2() {}
-
   install() {
     this.npmInstall(
       [
@@ -96,30 +92,22 @@ module.exports = class Mtpg extends Generator {
     }
   }
 
-  paths() {
-    let r = this.destinationRoot()
-    // returns '~/projects'
-    // this.log(r)
-
-    let s = this.sourceRoot()
-    // this.log(s)
-
-    this.destinationPath('index.js')
-    // returns '~/projects/index.js'
-  }
-
-  writing() {
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('public/index.html'),
-      { title: 'Templating with Yeoman' }
-    )
-  }
+  // writing() {
+  //   this.fs.copyTpl(
+  //     this.templatePath('index.html'),
+  //     this.destinationPath('public/index.html'),
+  //     { title: 'Templating with Yeoman' }
+  //   )
+  // }
 
   prompting() {
-    return prompts(Object.assign($scope, { this: this }))
+    if (!this.options['skip-prompt']) {
+      return prompts(Object.assign($scope, { this: this }))
+    }
   }
-
+  configuring() {
+    
+  }
   writing() {
     writes(Object.assign({}, $scope, { this: this }))
   }
