@@ -5,7 +5,7 @@ let controller = {
   index: async (ctx, next) => {
     ctx.type = 'text/html; charset=utf-8'
     ctx.body = await common.m.njk.render('index.tpl', {
-      title: 'service',
+      title: '<%= moduleName %>',
       name: 'ok'
     })
   }

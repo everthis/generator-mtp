@@ -1,65 +1,83 @@
-const options = [{
-	prop: 'database',
-	val: {
-	  alias: 'db',
-	  desc: 'Set database used in this app',
-	  type: String,
-	  default: 'mysql'
+const options = [
+	{
+		prop: 'database',
+		val: {
+			alias: 'd',
+			desc: 'database used in this app. (none, mysql, postgresql)',
+			type: String,
+			default: 'mysql'
+		}
+	},
+	{
+		prop: 'front-end-framework',
+		val: {
+			alias: 'f',
+			desc: 'front end framework used in this app',
+			type: String,
+			default: 'vue'
+		}
+	},
+	{
+		prop: 'back-end-framework',
+		val: {
+			alias: 'b',
+			desc: 'back end framework used in this app. (none, koa)',
+			type: String,
+			default: 'koa'
+		}
+	},
+	{
+		prop: 'orm',
+		val: {
+			desc: 'orm framework used in this app. (none, sequelize)',
+			type: String,
+			default: 'sequelize'
+		}
+	},
+	{
+		prop: 'communication-method',
+		val: {
+			alias: 'c',
+			desc:
+				'communication method of Nodejs app. (tcp_ip_sockets, unix_sockets)',
+			type: String,
+			default: 'unix_sockets'
+		}
+	},
+	{
+		prop: 'css',
+		val: {
+			desc: 'css preprocessor usage. (plain, sass, less, stylus)',
+			type: String,
+			default: 'sass'
+		}
+	},
+	{
+		prop: 'description',
+		val: {
+			alias: 'p',
+			desc: 'description of this app',
+			type: String,
+			default: ''
+		}
+	},
+	{
+		prop: 'skip-prompt',
+		val: {
+			alias: 'y',
+			desc: 'skip prompting',
+			type: Boolean,
+			default: false
+		}
+	},
+	{
+		prop: 'safe',
+		val: {
+			desc: 'use tested version of dependencies',
+			type: Boolean,
+			default: false
+		}
 	}
-}, {
-	prop: 'front-end-framework',
-	val: {
-	  alias: 'fef',
-	  desc: 'Set front end framework used in this app',
-	  type: String,
-	  default: 'vue'
-	}
-}, {
-	prop: 'skip-node',
-	val: {
-	  alias: 'nn',
-	  desc: 'Don\'t use node in this app',
-	  type: Boolean,
-	  default: false
-	}
-}, {
-	prop: 'backend-framework',
-	val: {
-	  alias: 'bef',
-	  desc: 'Set back end framework used in this app',
-	  type: String,
-	  default: 'koa'
-	}
-}, {
-	prop: 'orm',
-	val: {
-	  desc: 'Set ORM framework used in this app',
-	  type: String,
-	  default: 'sequelize'
-	}
-}, {
-	prop: 'skip-orm',
-	val: {
-	  desc: 'Don\'t use ORM framework in this app',
-	  type: Boolean,
-	  default: false
-	}
-}, {
-	prop: 'connection-method',
-	val: {
-	  alias: 'cm',
-	  desc: 'Set connection method of Nodejs app',
-	  type: String,
-	  default: 'socket'
-	}
-}, {
-	prop: 'description',
-	val: {
-	  alias: 'desc',
-	  desc: 'Set description of this app',
-	  type: String,
-	  default: ''
-	}
-}]
+]
 
 module.exports = options

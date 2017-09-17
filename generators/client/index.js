@@ -1,12 +1,18 @@
 const Generator = require('yeoman-generator')
 const writes = require('./partials/_writing')
 const operatePackageJson = require('../../public/operatePackageJson')
+const combKeyVal = require('../../public/combKeyVal')
+const depsMap = require('./deps')
 
 const $scope = {}
 
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
+    this.props = {
+      moduleName: opts.moduleName,
+      safe: opts.safe
+    }
     const n = this.rootGeneratorName()
   }
 
@@ -16,45 +22,16 @@ module.exports = class extends Generator {
     writes(Object.assign({}, $scope, { this: this }))
   }
 
+
   install() {
     this.npmInstall(
-      [
-        'vue',
-        'vuex',
-        'vue-router',
-        'whatwg-fetch',
-        'node-fetch',
-        'normalize.css'
-      ],
+      this.props.safe ? combKeyVal(depsMap.deps) : Object.keys(depsMap.deps),
       {
         save: true
       }
     )
     this.npmInstall(
-      [
-        'vue-loader',
-        'css-loader',
-        'style-loader',
-        'css-hot-loader',
-        'node-sass',
-        'postcss-loader',
-        'sass-loader',
-        'vue-template-compiler',
-        'webpack',
-        'webpack-merge',
-        'webpack-dev-server',
-        'webpack-bundle-analyzer',
-        'webpack-manifest-plugin',
-        'compression-webpack-plugin',
-        'extract-text-webpack-plugin',
-        'babel-core',
-        'babel-loader',
-        'babel-preset-env',
-        'babel-preset-es2015',
-        'babel-plugin-transform-runtime',
-        'babel-plugin-syntax-dynamic-import',
-        'babel-plugin-transform-object-rest-spread'
-      ],
+      this.props.safe ? combKeyVal(depsMap.devDeps) : Object.keys(depsMap.devDeps),
       { 'save-dev': true }
     )
   }
@@ -65,7 +42,7 @@ module.exports = class extends Generator {
         field: 'scripts',
         key: 'dev:webpack',
         val:
-          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8051 --progress --inline --hot --socket shared/sockets/webpack.sock'
+          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8050 --progress --inline --hot --socket shared/socket/webpack.sock'
       },
       {
         field: 'scripts',

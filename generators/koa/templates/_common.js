@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 const apiDir = path.resolve(__dirname, './api')
-const modulesDir = path.resolve(__dirname, './modules')
+const modulesDir = path.resolve(__dirname, './module')
 const basename = path.basename(module.filename)
 const jsonStr = JSON.stringify
 const log = console.log

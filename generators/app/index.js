@@ -18,7 +18,6 @@ module.exports = class Mtpg extends Generator {
   constructor(args, opts) {
     super(args, opts)
     this.props = {}
-    // This makes `appname` a required argument.
     this.argument('appname', {
       type: String,
       desc: 'app name',
@@ -28,98 +27,64 @@ module.exports = class Mtpg extends Generator {
       }
     })
 
-    this.props.name = this.options.appname
-    // And you can then access it later; e.g.
-    this.log(this.options.appname)
+    this.props.appname = this.options.appname
 
     for (let i = 0; i < options.length; i++) {
       this.option(options[i].prop, options[i].val)
     }
-
-    // this.log(this.options)
-    // And you can then access it later; e.g.
-    // this.scriptSuffix = (this.options.coffee ? ".coffee": ".js");
   }
 
   initializing() {
-    if (!this.options || this.options.database || !this.options['no-db']) {
+    if (this.options.database !== 'none') {
       this.composeWith(require.resolve('../db'), {
         arguments: [
           {
-            db: this.options.db
+            db: this.options.database
           }
-        ]
+        ],
+        orm: this.options.orm,
+        safe: this.options.safe
       })
     }
-    if (!this.options['skip-node']) {
+    if (this.options['back-end-framework'] !== 'none') {
       this.composeWith(require.resolve('../koa'), {
         db: this.options.db,
-        moduleName: this.options.appname
+        moduleName: this.options.appname,
+        safe: this.options.safe
       })
     }
-    this.composeWith(require.resolve('../client'))
+    this.composeWith(require.resolve('../client'), {
+      moduleName: this.options.appname,
+      safe: this.options.safe
+    })
     this.composeWith(require.resolve('../shared'))
     this.composeWith(require.resolve('../test'))
     this.composeWith(require.resolve('../bin'))
   }
 
-  method1() {
-    // this.log('method 1 just ran')
-  }
-
-  method2() {
-    // this.log('method 2 just ran')
-  }
-
-  install() {
-    this.npmInstall(
-      [
-        'babel-preset-env',
-        'babel-plugin-transform-object-rest-spread',
-        'foreman'
-      ],
-      { 'save-dev': true }
-    )
-    this.npmInstall(['lodash'], { save: true })
-  }
+  install() {}
 
   default() {
-    if (path.basename(this.destinationPath()) !== this.props.name) {
+    if (path.basename(this.destinationPath()) !== this.props.appname) {
       this.log(
         'Your app must be inside a folder named ' +
-          chalk.yellow(this.props.name) +
+          chalk.yellow(this.props.appname) +
           '\n' +
           "I'll automatically create this folder."
       )
-      mkdirp(this.props.name)
-      this.destinationRoot(this.destinationPath(this.props.name))
+      mkdirp(this.props.appname)
+      this.destinationRoot(this.destinationPath(this.props.appname))
     }
   }
 
-  paths() {
-    let r = this.destinationRoot()
-    // returns '~/projects'
-    // this.log(r)
-
-    let s = this.sourceRoot()
-    // this.log(s)
-
-    this.destinationPath('index.js')
-    // returns '~/projects/index.js'
-  }
-
-  writing() {
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('public/index.html'),
-      { title: 'Templating with Yeoman' }
-    )
-  }
-
   prompting() {
-    return prompts(Object.assign({}, $scope, { this: this }))
+    if (!this.options['skip-prompt']) {
+      return prompts(Object.assign($scope, { this: this }))
+    } else {
+      this.props.description = 'description of this app'
+    }
   }
-
+  configuring() {}
   writing() {
     writes(Object.assign({}, $scope, { this: this }))
   }

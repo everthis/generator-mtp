@@ -3,6 +3,8 @@ const options = require('./partials/_options')
 const writes = require('./partials/_writing')
 const prompts = require('./partials/_prompting')
 const yosay = require('yosay')
+const combKeyVal = require('../../public/combKeyVal')
+const depsMap = require('./deps')
 
 const $scope = {
   yosay
@@ -11,7 +13,11 @@ const $scope = {
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts)
-    this.props = {}
+    this.props = {
+      orm: opts.orm,
+      db: opts.arguments[0].db,
+      safe: opts.safe
+    }
     this.argument('db', {
       type: String,
       desc: 'database',
@@ -30,11 +36,22 @@ module.exports = class extends Generator {
   writing() {
     writes(Object.assign({}, $scope, { this: this }))
   }
+  configuring() {}
+  _filterOrm(arr) {
+    return arr.filter(el => el.indexOf('sequelize') === -1)
+  }
 
   install() {
-    this.npmInstall(['sequelize', 'sequelize-cli', 'mysql2'], { save: true })
+    const deps = this.props.safe
+      ? combKeyVal(depsMap.deps)
+      : Object.keys(depsMap.deps)
+    const insDeps = this.props.orm === 'none' ? this._filterOrm(deps) : deps
+    this.npmInstall(insDeps, {
+      save: true
+    })
   }
   end() {
+    if (this.props.orm === 'none') return
     this.spawnCommandSync(
       'node',
       ['./node_modules/.bin/sequelize', 'init:models'],
