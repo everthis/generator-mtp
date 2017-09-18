@@ -23,18 +23,17 @@ function operatePackageJson(ctx, params) {
   } else {
     loopParams(pjObj, [params], callbackArr)
   }
-
-  jsonfile.writeFile(pjPath, pjObj, {spaces: 2}, (err) => {
-    if (err) {
+  try{
+    jsonfile.writeFileSync(pjPath, pjObj, {spaces: 2})
+  } catch(err) {
       ctx.log(err)
-    } else {
-      if (callbackArr && callbackArr.length) {
-        for (let i = 0; i < callbackArr.length; i++) {
-          callbackArr[i].call(ctx)
-        }
-      }
+      return
+  }
+  if (callbackArr && callbackArr.length) {
+    for (let i = 0; i < callbackArr.length; i++) {
+      callbackArr[i].call(ctx)
     }
-  })
+  }
 }
 
 module.exports = operatePackageJson

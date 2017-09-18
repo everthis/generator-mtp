@@ -7,7 +7,6 @@ const modulesDir = path.resolve(__dirname, './module')
 const basename = path.basename(module.filename)
 const jsonStr = JSON.stringify
 const log = console.log
-const _ = require('lodash')
 let modules = {}
 
 function removeFalsePropFromObj(obj) {
@@ -45,7 +44,6 @@ fs
 module.exports = {
 	util: {
 		path,
-		_,
 		log,
 		ok,
 		jsonStr,
