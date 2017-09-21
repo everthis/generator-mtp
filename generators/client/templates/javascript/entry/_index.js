@@ -19,7 +19,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: '/<%= moduleName %>',
+  base: '/<%= s || moduleName.split("-")[moduleName.split("-").length - 1] %>',
   routes
 })
 

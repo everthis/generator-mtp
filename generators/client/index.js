@@ -11,7 +11,10 @@ module.exports = class extends Generator {
     super(args, opts)
     this.props = {
       moduleName: opts.moduleName,
-      safe: opts.safe
+      safe: opts.safe,
+      vport: opts.vport,
+      'short-prefix': opts['short-prefix'],
+      s: opts['short-prefix']
     }
     const n = this.rootGeneratorName()
   }
@@ -22,7 +25,6 @@ module.exports = class extends Generator {
     writes(Object.assign({}, $scope, { this: this }))
   }
 
-
   install() {
     this.npmInstall(
       this.props.safe ? combKeyVal(depsMap.deps) : Object.keys(depsMap.deps),
@@ -31,7 +33,9 @@ module.exports = class extends Generator {
       }
     )
     this.npmInstall(
-      this.props.safe ? combKeyVal(depsMap.devDeps) : Object.keys(depsMap.devDeps),
+      this.props.safe
+        ? combKeyVal(depsMap.devDeps)
+        : Object.keys(depsMap.devDeps),
       { 'save-dev': true }
     )
   }
@@ -41,8 +45,9 @@ module.exports = class extends Generator {
       {
         field: 'scripts',
         key: 'dev:webpack',
-        val:
-          'webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:8050 --progress --inline --hot --socket shared/socket/webpack.sock'
+        val: `NODE_ENV=development nodemon -w ./client/webpack -- ./node_modules/.bin/c-webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:${this
+          .props.vport ||
+          8051} --sockjsPrefix /ws/${this.props.s || this.props.moduleName} --progress --inline --hot --socket shared/socket/webpack.sock`
       },
       {
         field: 'scripts',

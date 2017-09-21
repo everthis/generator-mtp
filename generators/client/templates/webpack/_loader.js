@@ -6,10 +6,10 @@ const genRules = function($scope) {
             include: $scope.clientRoot,
             options: {
                 loaders: {
-                    scss: $scope.ExtractTextPlugin.extract({
+                    scss: ['css-hot-loader'].concat($scope.ExtractTextPlugin.extract({
                         use: [$scope.cssLoaderConfig, 'sass-loader'],
                         fallback: 'vue-style-loader'
-                    }),
+                    })),
                     css: $scope.ExtractTextPlugin.extract({
                         use: 'css-loader',
                         fallback: 'vue-style-loader'

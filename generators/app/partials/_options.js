@@ -55,7 +55,7 @@ const options = [
 	{
 		prop: 'description',
 		val: {
-			alias: 'p',
+			alias: 'e',
 			desc: 'description of this app',
 			type: String,
 			default: ''
@@ -76,6 +76,24 @@ const options = [
 			desc: 'use tested version of dependencies',
 			type: Boolean,
 			default: false
+		}
+	},
+	{
+		prop: 'short-prefix',
+		val: {
+			alias: 's',
+			desc: 'short prefix of app',
+			type: String,
+			default: ''
+		}
+	},
+	{
+		prop: 'vport',
+		val: {
+			alias: 'p',
+			desc: 'visit port.(default: 8051)',
+			type: Number,
+			default: 8051
 		}
 	}
 ]

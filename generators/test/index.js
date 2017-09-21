@@ -1,24 +1,36 @@
-const Generator = require('yeoman-generator');
+const Generator = require('yeoman-generator')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const writes = require('./partials/_writing')
 const operatePackageJson = require('../../public/operatePackageJson')
+
+const combKeyVal = require('../../public/combKeyVal')
+const depsMap = require('./deps')
+
 const $scope = {}
 
 module.exports = class extends Generator {
   constructor(args, opts) {
-    super(args, opts);
+    super(args, opts)
+    this.props = {
+      moduleName: opts.moduleName,
+      safe: opts.safe,
+      s: opts['short-prefix']
+    }
   }
 
-  initializing() {
-  }
-  prompting() {
-  }
+  initializing() {}
+  prompting() {}
   install() {
-    this.npmInstall(['jest'], { 'save-dev': true })
+    this.npmInstall(
+      this.props.safe
+        ? combKeyVal(depsMap.devDeps)
+        : Object.keys(depsMap.devDeps),
+      { 'save-dev': true }
+    )
   }
   writing() {
-    writes(Object.assign({}, $scope, {this: this}))
+    writes(Object.assign({}, $scope, { this: this }))
   }
   end() {
     operatePackageJson(this, {
@@ -32,4 +44,4 @@ module.exports = class extends Generator {
       }
     })
   }
-};
+}

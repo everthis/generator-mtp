@@ -15,7 +15,7 @@ const nodeProdSocket = path.resolve(
 const nodeSocket = isProd ? nodeProdSocket : nodeDevSocket
 const nodePidPath = path.resolve(__dirname, '../../shared/pid/node.pid')
 const moduleName = '<%= moduleName %>'
-const assetsPublicPrefix = '/static/' + moduleName + '/'
+const assetsPublicPrefix = '/static/<%= s || moduleName -%>/'
 const assetsPathPrefix = '/build/'
 const logDir = path.join(__dirname, '..', '..', 'shared', 'log')
 const xtplRootDir = path.join(__dirname, '..', 'server')
@@ -23,7 +23,7 @@ const xtplViewDir = 'templates'
 const xtplLayoutsDir = './templates/layouts'
 const xtplPartialsDir = './templates/partials'
 const appPrefix =
-    '/<%= moduleName.split(' - ')[moduleName.split(' - ').length - 1] %>'
+    '/<%= s || moduleName.split("-")[moduleName.split("-").length - 1] %>'
 module.exports = {
     isDev,
     isProd,

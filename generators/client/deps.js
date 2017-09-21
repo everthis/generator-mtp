@@ -7,13 +7,13 @@ module.exports = {
         'normalize.css': '^7.0.0'
     },
     devDeps: {
-        'babel-core': '^7.0.0-beta.0',
-        'babel-loader': '^7.1.2',
-        'babel-plugin-syntax-dynamic-import': '^7.0.0-beta.0',
-        'babel-plugin-transform-object-rest-spread': '^7.0.0-beta.0',
-        'babel-plugin-transform-runtime': '^7.0.0-beta.0',
-        'babel-preset-env': '^2.0.0-beta.0',
-        'babel-preset-es2015': '^7.0.0-beta.0',
+        "babel-core": "^6.26.0",
+        "babel-loader": "^7.1.2",
+        "babel-plugin-syntax-dynamic-import": "^6.18.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "babel-plugin-transform-runtime": "^6.23.0",
+        "babel-preset-env": "^1.6.0",
+        "babel-preset-es2015": "^6.24.1",
         'compression-webpack-plugin': '^1.0.0',
         'css-hot-loader': '^1.3.1',
         'css-loader': '^0.28.7',
@@ -26,7 +26,7 @@ module.exports = {
         'vue-template-compiler': '^2.4.4',
         webpack: '^3.5.6',
         'webpack-bundle-analyzer': '^2.9.0',
-        'webpack-dev-server': '^2.8.2',
+        'c-webpack-dev-server': '^2.8.2',
         'webpack-manifest-plugin': '^1.3.2',
         'webpack-merge': '^4.1.0'
     }

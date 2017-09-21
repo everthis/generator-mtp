@@ -2,8 +2,8 @@
 
 const partialMark = '_'
 const pml = partialMark.length
-const copyFiles = ['_.editorconfig', '_.gitignore', '_.babelrc.js', '_.env']
-const tplFiles = ['_package.json']
+const copyFiles = ['_.editorconfig', '_.gitignore', '_.babelrc', '_.env']
+const tplFiles = ['_package.json', '_README.md']
 
 function writes($scope) {
   let writesObj = {

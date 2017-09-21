@@ -2,7 +2,7 @@ let fs = require('fs')
 let path = require('path')
 let config = require('../config')
 
-let moduleName = '<%= moduleName %>'
+let moduleName = '<%= s || moduleName %>'
 let manifestFilePath = path.resolve(
     __dirname,
     '../build/' + moduleName + '/manifest.json'

@@ -28,7 +28,8 @@ devConfig = merge.smartStrategy({
       /*
        * process invalid host header.
        */
-      disableHostCheck: true
+      disableHostCheck: true,
+      sockjsPrefix: '/ws/<%= s || moduleName -%>'
     },
     plugins: [
 	    new ExtractTextPlugin("[name].css")

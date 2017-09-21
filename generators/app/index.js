@@ -50,15 +50,23 @@ module.exports = class Mtpg extends Generator {
       this.composeWith(require.resolve('../koa'), {
         db: this.options.db,
         moduleName: this.options.appname,
-        safe: this.options.safe
+        safe: this.options.safe,
+        'short-prefix': this.options['short-prefix']
       })
     }
     this.composeWith(require.resolve('../client'), {
       moduleName: this.options.appname,
-      safe: this.options.safe
+      safe: this.options.safe,
+      vport: this.options.vport,
+      'short-prefix': this.options['short-prefix']
     })
     this.composeWith(require.resolve('../shared'))
-    this.composeWith(require.resolve('../test'))
+    this.composeWith(require.resolve('../test'), {
+      moduleName: this.options.appname,
+      safe: this.options.safe,
+      vport: this.options.vport,
+      'short-prefix': this.options['short-prefix']
+    })
     this.composeWith(require.resolve('../bin'))
   }
 
