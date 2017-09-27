@@ -8,12 +8,12 @@ dist/
 *.bak
 dump.rdb
 
-/shared/pids/*
+/shared/pid/*
 /shared/log/*
-/shared/sockets/*
-!/shared/pids/.gitkeep
+/shared/socket/*
+!/shared/pid/.gitkeep
 !/shared/log/.gitkeep
-!/shared/sockets/.gitkeep
+!/shared/socket/.gitkeep
 
 /.output/*
 !/.output/.gitkeep

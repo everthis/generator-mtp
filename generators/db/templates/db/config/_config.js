@@ -4,7 +4,7 @@ module.exports = {
   development: {
     username: ENV['DB_USERNAME'],
     password: ENV['DB_PASSWORD'],
-    database: 'database_development',
+    database: '<%= moduleName %>_development',
     host: '127.0.0.1',
     dialect: 'mysql',
     timezone: '+8:00',
@@ -21,14 +21,14 @@ module.exports = {
   test: {
     username: 'root',
     password: null,
-    database: 'database_test',
+    database: '<%= moduleName %>_test',
     host: '127.0.0.1',
     dialect: 'postgres'
   },
   production: {
     username: ENV['DB_USERNAME'],
     password: ENV['DB_PASSWORD'],
-    database: 'database_production',
+    database: '<%= moduleName %>_production',
     host: '127.0.0.1',
     dialect: 'mysql',
     timezone: '+8:00',

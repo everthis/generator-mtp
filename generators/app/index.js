@@ -42,6 +42,7 @@ module.exports = class Mtpg extends Generator {
             db: this.options.database
           }
         ],
+        moduleName: this.options.appname,
         orm: this.options.orm,
         safe: this.options.safe
       })

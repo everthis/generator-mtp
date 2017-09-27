@@ -16,6 +16,7 @@ module.exports = class extends Generator {
     this.props = {
       orm: opts.orm,
       db: opts.arguments[0].db,
+      moduleName: opts.moduleName,
       safe: opts.safe
     }
     this.argument('db', {

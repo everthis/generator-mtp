@@ -12,10 +12,14 @@ const autoprefixer = require('autoprefixer')
 let node_modules = path.resolve(__dirname, '../node_modules')
 
 let indexJsPath = path.resolve(__dirname, '../javascript/entry/index.js')
-const nodeEnv = process.env.NODE_ENV === 'production' ? 'production' : 'development'
+const nodeEnv =
+    process.env.NODE_ENV === 'production' ? 'production' : 'development'
 const isProd = nodeEnv === 'production' ? true : false
 const $scope = {
-    cssLoaderConfig: { loader: 'css-loader', options: { minimize: isProd ? true : false} },
+    cssLoaderConfig: {
+        loader: 'css-loader',
+        options: { minimize: isProd ? true : false }
+    },
     nodeEnv,
     isProd,
     ExtractTextPlugin,
@@ -31,7 +35,7 @@ let defaults = {
         index: [indexJsPath]
     },
     output: {
-        path: path.resolve(__dirname, '../build/' + moduleName),
+        path: path.resolve(__dirname, '../../build/' + moduleName),
         publicPath: '/static/' + (shortPrefix || moduleName) + '/'
     },
     resolve: {
