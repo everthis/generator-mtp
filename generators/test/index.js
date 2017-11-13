@@ -33,15 +33,32 @@ module.exports = class extends Generator {
     writes(Object.assign({}, $scope, { this: this }))
   }
   end() {
-    operatePackageJson(this, {
-      field: 'scripts',
-      key: 'test',
-      val: 'jest',
-      cb: function() {
-        this.spawnCommandSync('npm', ['test'], {
-          cwd: this.destinationRoot()
-        })
+    operatePackageJson(this, [
+      {
+        field: 'scripts',
+        key: 'dev:test',
+        val: 'jest --watch'
+      },
+      {
+        field: 'jest',
+        key: 'testRegex',
+        val: '/test/.*\\.test\\.(ts|tsx|js)$'
+      },
+      {
+        field: 'jest',
+        key: 'moduleFileExtensions',
+        val: ['ts', 'tsx', 'js', 'json']
+      },
+      {
+        field: 'scripts',
+        key: 'test',
+        val: 'jest',
+        cb: function() {
+          this.spawnCommandSync('npm', ['test'], {
+            cwd: this.destinationRoot()
+          })
+        }
       }
-    })
+    ])
   }
 }

@@ -28,6 +28,24 @@ function ok() {
 function isAsyncFn(fn) {
 	return fn[Symbol.toStringTag] === 'AsyncFunction' ? true : false
 }
+function camelCaseToSlash(str) {
+	const upperChars = str.match(/([A-Z])/g)
+	if (!upperChars) {
+		return str
+	}
+
+	let res = str.toString()
+	for (let i = 0, n = upperChars.length; i < n; i++) {
+		res = res.replace(
+			new RegExp(upperChars[i]),
+			'/' + upperChars[i].toLowerCase()
+		)
+	}
+	if (res.slice(0, 1) === '/') {
+		res = res.slice(1)
+	}
+	return res
+}
 
 fs
 	.readdirSync(modulesDir)
@@ -42,14 +60,13 @@ fs
 	})
 
 module.exports = {
-	util: {
-		path,
-		log,
-		ok,
-		jsonStr,
-		isAsyncFn,
-		removeFalsePropFromObj
-	},
+	path,
+	log,
+	ok,
+	jsonStr,
+	removeFalsePropFromObj,
+	camelCaseToSlash,
+	isAsyncFn,
 	modules,
 	m: modules,
 	apiDir,

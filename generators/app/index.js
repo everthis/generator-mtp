@@ -28,6 +28,9 @@ module.exports = class Mtpg extends Generator {
     })
 
     this.props.appname = this.options.appname
+    const appnameArr = (this.options.appname || 'app').split('-')
+    const default_s = appnameArr[appnameArr.length - 1]
+    this.props.s = opts.s || default_s
 
     for (let i = 0; i < options.length; i++) {
       this.option(options[i].prop, options[i].val)

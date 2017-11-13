@@ -3,6 +3,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../vuex/store'
 import Entry from '../../component/entry.vue'
+import vueRoute from '../common/vueRoute'
+import routePath from '../common/routePath'
 
 function importComponent(name) {
   return function(resolve) {
@@ -12,10 +14,7 @@ function importComponent(name) {
   }
 }
 
-const routes = [
-  { path: '/', component: importComponent('homepage') },
-  { path: '/test', component: importComponent('test') }
-]
+const routes = [...vueRoute(routePath)]
 
 const router = new VueRouter({
   mode: 'history',

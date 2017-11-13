@@ -6,7 +6,8 @@ const njk = nunjucks.configure('tpl', {
   trimBlocks: true,
   lstripBlocks: true,
   autoescape: true,
-  trimBlocks: true
+  trimBlocks: true,
+  watch: true
 })
 
 njk.addExtension('xscriptExtension', xscriptExtension)

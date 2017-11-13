@@ -8,7 +8,7 @@ const basename = path.basename(module.filename)
 const apis = {}
 
 function factoryFn(fn) {
-  const isAsync = common.util.isAsyncFn(fn)
+  const isAsync = common.isAsyncFn(fn)
   if (isAsync) {
     return async function asyncFactory(...args) {
       return await fn(common, ...args)

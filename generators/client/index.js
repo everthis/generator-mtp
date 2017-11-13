@@ -47,7 +47,7 @@ module.exports = class extends Generator {
         key: 'dev:webpack',
         val: `NODE_ENV=development nodemon -w ./client/webpack -- ./node_modules/.bin/c-webpack-dev-server --config ./client/webpack/dev.config.js --public 0.0.0.0:${this
           .props.vport ||
-          8051} --sockjsPrefix /ws/${this.props.s || this.props.moduleName} --progress --inline --hot --socket shared/socket/webpack.sock`
+          8077}  --progress --inline --hot --socket shared/socket/webpack.sock`
       },
       {
         field: 'scripts',
@@ -63,6 +63,12 @@ module.exports = class extends Generator {
         field: 'scripts',
         key: 'dev:start',
         val: 'npm run dev:webpack & npm run dev:node'
+      },
+      {
+        field: 'scripts',
+        key: 'build',
+        val:
+          'NODE_ENV=production webpack --config ./client/webpack/prod.config.js'
       }
     ])
   }

@@ -44,11 +44,18 @@ module.exports = class extends Generator {
   }
 
   end() {
-    operatePackageJson(this, {
-      field: 'scripts',
-      key: 'dev:node',
-      val:
-        'NODE_ENV=development nodemon -w ./server -w package.json -e js,json ./server/index.js'
-    })
+    operatePackageJson(this, [
+      {
+        field: 'scripts',
+        key: 'dev:node',
+        val:
+          'NODE_ENV=development nodemon -w ./server -w package.json -e js,json ./server/index.js'
+      },
+      {
+        field: 'scripts',
+        key: 'prod:node',
+        val: 'NODE_ENV=production node ./server/index.js'
+      }
+    ])
   }
 }

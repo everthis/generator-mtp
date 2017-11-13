@@ -4,7 +4,7 @@ const path = require('path')
 const partialMark = '_'
 const pml = partialMark.length
 const { findFiles, destFile } = require('../../../public/walk')
-const copyFiles = ['_.sequelizerc']
+const copyFiles = ['_.sequelizerc', 'db/config/_config.js']
 
 function mkpDest(filep) {
     const res = path.parse(filep)

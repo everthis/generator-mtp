@@ -4,11 +4,13 @@
 	    <nav-menu></nav-menu>
     </div>
     <div class="main-content-container c-container">
-      <template v-if="$route.matched.length">
-      	<router-view></router-view>
-      </template>
-      <template v-else>
-      </template>
+      <transition :name="transitionName">
+        <template v-if="$route.matched.length">
+          <router-view></router-view>
+        </template>
+        <template v-else>
+        </template>
+      </transition>
     </div>
   </div>
 </template>
@@ -20,7 +22,8 @@
   	components: { NavMenu },
   	data () {
   		return {
-  			loggedIn: false
+  			loggedIn: false,
+        transitionName: 'fade'
   		}
   	},
     computed: {
@@ -45,7 +48,6 @@
     display: flex;
   }
   .left-nav {
-    background-color: $dark-bg;
     flex-basis: 160px;
   }
   .main-content-container {

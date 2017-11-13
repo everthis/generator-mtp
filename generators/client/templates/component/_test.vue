@@ -1,6 +1,6 @@
 <template>
   <div>
-  init.
+  test.
   </div>
 </template>
 <script>

@@ -9,9 +9,9 @@
   </head>
   <body>
     {% block header %}
-    This is the default content
+    header
     {% endblock %}
-    
+
     <div id="app"></div>
     <section class="left">
       {% block left %}{% endblock %}
@@ -19,7 +19,7 @@
 
     <section class="right">
       {% block right %}
-      This is more content
+      right
       {% endblock %}
     </section>
 
